@@ -1,0 +1,165 @@
+:root { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #242424; background: #f5f5f5; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, .button { font: inherit; border: 1px solid #d6d6d6; background: #fff; color: #242424; border-radius: 8px; padding: 9px 13px; cursor: pointer; white-space: nowrap; }
+button:hover, .button:hover { background: #ececec; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.button.primary { background: #252525; border-color: #252525; color: white; }
+.topbar { min-height: 68px; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #fff; border-bottom: 1px solid #e4e4e4; }
+h1 { margin: 0; font-size: 17px; letter-spacing: .08em; }
+.header-actions { display: flex; gap: 8px; }
+.workspace { display: flex; height: calc(100dvh - 68px); min-height: 350px; }
+.viewer-section { display: flex; flex: 1; min-width: 0; flex-direction: column; }
+.toolbar { padding: 12px 18px; background: #fafafa; border-bottom: 1px solid #e4e4e4; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.file-info { display: flex; flex-direction: column; gap: 3px; min-width: 0; font-size: 13px; }
+.file-info strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-info span { color: #777; }
+.zoom-controls { display: flex; gap: 6px; align-items: center; }
+.zoom-controls button { min-width: 36px; padding: 7px 9px; }
+#zoomLabel { min-width: 48px; text-align: center; font-size: 13px; }
+.viewer-scroll { flex: 1; overflow: auto; overscroll-behavior: contain; background: #dedede; }
+.pdf-pages { width: max-content; min-width: 100%; padding: 24px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.pdf-page { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.pdf-page canvas { display: block; background: white; box-shadow: 0 2px 10px #0002; }
+.page-caption { font-size: 12px; color: #555; }
+.empty-state { text-align: center; margin: 15vh auto 0; padding: 20px; color: #555; }
+.empty-icon { font-size: 48px; }
+.empty-state h2 { font-size: 18px; color: #333; }
+.empty-state p { font-size: 14px; line-height: 1.6; }
+.status { background: #fafafa; border-top: 1px solid #e4e4e4; padding: 8px 18px; color: #777; font-size: 12px; }
+.threads-panel { width: 280px; flex: none; padding: 20px; background: #fff; border-left: 1px solid #e4e4e4; overflow-y: auto; }
+.threads-panel[hidden] { display: none; }
+.panel-title { display: flex; align-items: center; justify-content: space-between; }
+.panel-title h2 { font-size: 17px; margin: 0; }
+.panel-title span { font-size: 12px; color: #888; }
+.panel-note, .thread-placeholder { font-size: 13px; color: #777; line-height: 1.6; }
+.thread-placeholder { border: 1px dashed #ccc; border-radius: 8px; padding: 18px; margin-top: 18px; }
+@media (max-width: 720px) {
+  .topbar { padding: 10px 12px; min-height: 62px; }
+  h1 { font-size: 13px; }
+  .header-actions { gap: 5px; }
+  .header-actions button, .header-actions .button { font-size: 12px; padding: 8px; }
+  .workspace { height: calc(100dvh - 62px); }
+  .toolbar { padding: 10px; flex-wrap: wrap; }
+  .zoom-controls { margin-left: auto; }
+  .pdf-pages { padding: 12px; gap: 14px; }
+  .threads-panel { position: absolute; z-index: 10; right: 0; top: 62px; bottom: 0; width: min(82vw, 300px); box-shadow: -4px 0 18px #0002; }
+}
+/* Virtualized PDF pages: only visible canvases are mounted */
+.view-options{display:flex;align-items:center;gap:15px;padding:9px 18px;background:white;border-bottom:1px solid #e5e5e5;font-size:13px;flex-wrap:wrap}
+.view-options label{display:flex;align-items:center;gap:6px}
+#renderNote{color:#777}
+.lazy-page{display:flex;flex-direction:column;align-items:center;gap:8px}
+.page-frame{position:relative;background:#fff;box-shadow:0 2px 10px #0002}
+.page-canvas{display:block}
+.legend-row{border-bottom:1px solid #eee;padding:7px 0;font-size:13px}
+/* Full chart grid */
+#pdfPages{display:block;min-width:0;width:max-content;padding:0;margin:0;gap:0;align-items:initial}
+#wholePattern{position:relative;background:#fff;contain:layout style}
+.pattern-tile{position:absolute;background:#fff;overflow:hidden;touch-action:pan-x pan-y}
+.tile-canvas{display:block;cursor:crosshair}
+.pattern-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:9px 12px;background:#fff;border-bottom:1px solid #ddd;font-size:12px}
+.pattern-actions button{padding:7px 10px;font-size:12px}
+.pattern-actions button.active{background:#242424;color:white}
+#chosenSymbol{color:#666}#overallProgress{margin-left:auto;font-variant-numeric:tabular-nums}
+.axis-label{position:absolute;font:11px -apple-system,sans-serif;color:#444;pointer-events:none;transform:translate(-50%,-50%)}
+.axis-top{top:8px}.axis-left{left:8px}
+.sort-wrap{display:flex;align-items:center;gap:10px;margin:12px 0;font-size:12px}
+.sort-wrap select{min-width:0;max-width:150px;padding:6px;border:1px solid #ddd;border-radius:6px;background:white}
+.thread-row{display:flex;align-items:center;gap:6px;border-bottom:1px solid #eee;padding:4px 0}
+.thread-row.selected{background:#fff0da}
+.thread-pick{border:0;background:transparent;text-align:left;flex:1;min-width:0;white-space:normal;padding:7px 3px;font-size:12px}
+.thread-color{width:29px;height:28px;padding:0;border:0;background:transparent;cursor:pointer;flex-shrink:0}
+.pattern-tile .tile-canvas,.pattern-tile .tile-overlay{position:absolute;left:0;top:0}
+.pattern-tile .tile-overlay{pointer-events:none}
+.cloud-sync-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;background:#f6f6f6;border-bottom:1px solid #ddd;font-size:12px}
+.cloud-sync-bar input{padding:7px;border:1px solid #ccc;border-radius:6px;min-width:180px}
+.cloud-sync-bar button{padding:7px 10px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer}
+.cloud-sync-bar [hidden]{display:none}
+
+/* Compact, responsive workspace — overrides legacy toolbar styling */
+:root{color:#252525;background:#fff}
+.topbar{min-height:58px;padding:10px 18px;gap:10px}
+.topbar h1{font-size:15px;letter-spacing:.065em}
+.header-actions{align-items:center}
+.header-actions button,.header-actions .button{padding:8px 12px;font-size:12px}
+#openSettings{font-size:19px;min-width:38px;line-height:1}
+.workspace{height:calc(100dvh - 58px);min-height:0}
+.toolbar{padding:9px 16px;background:#fff}
+.file-info{font-size:12px}
+.file-info strong{font-size:13px}
+.zoom-controls{gap:3px}
+.zoom-controls button{border:0;background:transparent;min-width:30px}
+.zoom-controls button:hover{background:#f2f2f2}
+#zoomLabel{min-width:44px}
+.pattern-actions{padding:7px 14px;gap:5px}
+.pattern-actions button{border-radius:7px;padding:7px 9px}
+#chosenSymbol{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:30vw}
+.viewer-scroll{background:#e9e9e9}
+.status{padding:6px 14px;background:#fff}
+.threads-panel{width:270px;padding:16px}
+.threads-panel[hidden],.settings-drawer[hidden],.drawer-backdrop[hidden]{display:none!important}
+.drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.27);z-index:49}
+.settings-drawer{position:fixed;right:0;top:0;bottom:0;width:min(380px,100vw);z-index:50;background:white;box-shadow:-8px 0 32px #0002;padding:22px;overflow:auto}
+.drawer-heading{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding-bottom:14px}
+.drawer-heading h2{margin:0;font-size:19px}
+.drawer-heading button{border:0;font-size:18px}
+.settings-group{padding:18px 0;border-bottom:1px solid #eee}
+.settings-group h3{font-size:14px;margin:0 0 8px}
+.settings-group p{font-size:12px;color:#777;line-height:1.65}
+.cloud-sync-bar{display:flex;flex-direction:column;align-items:stretch;gap:10px;padding:0;background:transparent;border:0;font-size:12px}
+.cloud-sync-bar input{width:100%;min-width:0}
+.cloud-sync-bar button{width:100%}
+@media(max-width:720px){
+ .topbar{min-height:54px;padding:8px 10px}
+ .topbar h1{font-size:12px}
+ .header-actions{gap:4px}
+ .header-actions button,.header-actions .button{font-size:11px;padding:7px 8px}
+ .workspace{height:calc(100dvh - 54px)}
+ .toolbar{padding:7px 10px;flex-wrap:nowrap}
+ .file-info{max-width:42vw}
+ .file-info strong{font-size:11px}
+ .zoom-controls{margin:0}
+ .zoom-controls button{padding:5px;min-width:26px}
+ #zoomLabel{min-width:38px;font-size:11px}
+ .pattern-actions{gap:4px;padding:7px 9px}
+ .pattern-actions button{font-size:11px;padding:7px}
+ #chosenSymbol{max-width:32vw;font-size:11px}
+ #overallProgress{font-size:11px}
+ .threads-panel{top:54px;bottom:0;width:min(85vw,310px);z-index:20}
+}
+
+/* v6: default pointer on chart and reliably hide the initial placeholder. */
+.tile-canvas, .pattern-tile, .tile-overlay { cursor: default !important; }
+#emptyState[hidden] { display: none !important; }
+#pdfPages[hidden] { display: none !important; }
+
+/* v7: keep row/column numbers clear of clipped viewer edges. */
+#wholePattern .axis-left { left: 23px; min-width: 24px; text-align: right; }
+#wholePattern .axis-top { top: 13px; }
+#wholePattern { box-sizing: border-box; }
+
+/* DMC color swatches: remove both native Safari and custom gray borders. */
+input.thread-color {
+  width: 29px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  box-shadow: none;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+input.thread-color::-webkit-color-swatch-wrapper { padding: 0; }
+input.thread-color::-webkit-color-swatch {
+  border: 0;
+  border-radius: 0;
+}
+input.thread-color::-moz-color-swatch { border: 0; border-radius: 0; }
+
+/* v10: 파일명/페이지수는 숨기고 확대 도구만 오른쪽 정렬 */
+.toolbar{justify-content:flex-end}
+.file-info[hidden]{display:none!important}

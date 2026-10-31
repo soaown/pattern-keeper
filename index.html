@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Pattern Keeper</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <h1>PATTERN KEEPER</h1>
+    <div class="header-actions">
+      <label class="button primary" for="pdfInput" id="uploadButton">PDF 열기</label>
+      <input id="pdfInput" type="file" accept="application/pdf,.pdf" hidden />
+      <button id="toggleThreads" type="button" aria-controls="threadsPanel" aria-expanded="false">실 목록</button>
+      <button id="openSettings" type="button" aria-label="설정 열기" aria-controls="settingsDrawer" aria-expanded="false">⚙</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="viewer-section" aria-label="PDF 도안 뷰어">
+      <div class="toolbar">
+        <div class="zoom-controls">
+          <button id="zoomOut" type="button" aria-label="축소">−</button>
+          <span id="zoomLabel">100%</span>
+          <button id="zoomIn" type="button" aria-label="확대">+</button>
+          <button id="zoomReset" type="button" aria-label="배율 초기화">↺</button>
+        </div>
+      </div>
+      <!-- JS가 파일 정보를 갱신하므로 요소는 보이지 않게 유지합니다. -->
+      <div class="file-info" hidden aria-hidden="true">
+        <strong id="fileName"></strong>
+        <span id="pageInfo"></span>
+      </div>
+      <div id="viewerScroll" class="viewer-scroll">
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon">▦</div>
+          <h2>십자수 PDF 도안을 불러와 주세요</h2>
+          <p>상단의 PDF 업로드 버튼을 누르면 모든 페이지가 표시됩니다.</p>
+        </div>
+        <div id="pdfPages" class="pdf-pages" aria-live="polite"></div>
+      </div>
+      <div id="status" class="status" role="status">준비됨</div>
+    </section>
+
+    <aside id="threadsPanel" class="threads-panel" aria-label="DMC 실 목록">
+      <div class="panel-title">
+        <h2>DMC Threads</h2><span>미연결</span>
+      </div>
+      <p class="panel-note">실 목록과 PDF 기호 연결은 다음 단계에서 구현합니다.</p>
+      <div class="thread-placeholder">PDF 기호 분석 후 DMC 실 목록이 여기에 나타납니다.</div>
+    </aside>
+  </main>
+
+  <div id="drawerBackdrop" class="drawer-backdrop" hidden></div>
+  <section id="settingsDrawer" class="settings-drawer" role="dialog" aria-modal="true" aria-label="설정" hidden>
+    <div class="drawer-heading"><h2>설정</h2><button id="closeSettings" type="button" aria-label="설정 닫기">✕</button></div>
+    <div class="settings-group"><h3>클라우드 동기화</h3><p>동일한 계정으로 로그인하면 진행 상태를 다른 기기에서 불러올 수 있어요.</p><div id="syncSettings"></div></div>
+    <div class="settings-group"><h3>PDF 파일</h3><label class="button" for="pdfInput">다른 PDF 열기</label><p>이 기기에 PDF를 저장해 다음 접속 때 자동으로 불러옵니다. 완료 기록은 별도로 저장됩니다.</p><button id="forgetLocalPdf" type="button">저장된 PDF 삭제</button></div>
+  </section>
+  <script type="module" src="script.js"></script>
+</body>
+
+</html>
