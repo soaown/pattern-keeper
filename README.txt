@@ -1,12 +1,10 @@
-Pattern Keeper v8 — DMC screen-color palette
+Pattern Keeper v13 — 213 DMC + selected-symbol-only completion lock
 
-1. Extract all 8 files into your existing project folder.
-2. Open using VS Code Live Server.
-3. Upload the same verified 41-page PDF.
-4. Check a cell: it is filled with its DMC screen-color approximation.
-5. Open thread list to inspect or manually adjust colors.
+Replace ONLY these three files in the GitHub repository root:
+script.js
+pattern-data.js
+dmc-colors.js
 
-The 208 used DMC identifiers all have palette entries, including BLANC and ECRU.
-Previously saved manual color overrides take priority. To use a new default, change the swatch or clear its override in browser storage (not recommended if you have progress).
-Cloud sync and completed-cell storage behavior are unchanged.
-Colors are approximate display values, not official DMC measured RGB.
+Keep cloud-sync.js, sync-config.js, style.css, pdf-cache.js and all other files unchanged.
+
+Select a symbol in the thread list or on the chart, then click 완료 체크. Only cells matching the selected symbol can be toggled. Clearing selection returns to symbol-selection mode. Existing cell IDs, pattern SHA, and cloud sync calls are unchanged.

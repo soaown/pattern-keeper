@@ -1,5 +1,11 @@
 // Screen RGB approximations from community DMC charts. Not official measured thread RGB.
 export const DMC_COLORS = {
+  "523": "#ABB197",
+  "819": "#FFEEEB",
+  "962": "#E6A6A1",
+  "3011": "#898A58",
+  "3023": "#B1AA97",
+
   "03": "#B8B8BB",
   "04": "#AEAEB1",
   "06": "#DCC6B8",
