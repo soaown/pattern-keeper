@@ -15,7 +15,8 @@
       <label class="button primary" for="pdfInput" id="uploadButton">PDF 열기</label>
       <input id="pdfInput" type="file" accept="application/pdf,.pdf" hidden />
       <button id="toggleThreads" type="button" aria-controls="threadsPanel" aria-expanded="false">실 목록</button>
-      <button id="openSettings" type="button" aria-label="설정 열기" aria-controls="settingsDrawer" aria-expanded="false">⚙</button>
+      <button id="openSettings" type="button" aria-label="설정 열기" aria-controls="settingsDrawer"
+        aria-expanded="false">⚙</button>
     </div>
   </header>
 
@@ -56,9 +57,19 @@
 
   <div id="drawerBackdrop" class="drawer-backdrop" hidden></div>
   <section id="settingsDrawer" class="settings-drawer" role="dialog" aria-modal="true" aria-label="설정" hidden>
-    <div class="drawer-heading"><h2>설정</h2><button id="closeSettings" type="button" aria-label="설정 닫기">✕</button></div>
-    <div class="settings-group"><h3>클라우드 동기화</h3><p>동일한 계정으로 로그인하면 진행 상태를 다른 기기에서 불러올 수 있어요.</p><div id="syncSettings"></div></div>
-    <div class="settings-group"><h3>PDF 파일</h3><label class="button" for="pdfInput">다른 PDF 열기</label><p>이 기기에 PDF를 저장해 다음 접속 때 자동으로 불러옵니다. 완료 기록은 별도로 저장됩니다.</p><button id="forgetLocalPdf" type="button">저장된 PDF 삭제</button></div>
+    <div class="drawer-heading">
+      <h2>설정</h2><button id="closeSettings" type="button" aria-label="설정 닫기">✕</button>
+    </div>
+    <div class="settings-group">
+      <h3>클라우드 동기화</h3>
+      <p>동일한 계정으로 로그인하면 진행 상태를 다른 기기에서 불러올 수 있어요.</p>
+      <div id="syncSettings"></div>
+    </div>
+    <div class="settings-group">
+      <h3>PDF 파일</h3><label class="button" for="pdfInput">다른 PDF 열기</label>
+      <p>이 기기에 PDF를 저장해 다음 접속 때 자동으로 불러옵니다. 완료 기록은 별도로 저장됩니다.</p><button id="forgetLocalPdf" type="button">저장된 PDF
+        삭제</button>
+    </div>
   </section>
   <script type="module" src="script.js"></script>
 </body>

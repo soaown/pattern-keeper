@@ -1,10 +1,19 @@
-Pattern Keeper v13 — 213 DMC + selected-symbol-only completion lock
+Pattern Keeper v14 — DMC 213 + 선택 기호 잠금 + 미완료 칸 좌표 이동
 
-Replace ONLY these three files in the GitHub repository root:
-script.js
-pattern-data.js
-dmc-colors.js
+교체할 파일 (GitHub 저장소 루트에 업로드):
+  script.js
+  pattern-data.js
+  dmc-colors.js
 
-Keep cloud-sync.js, sync-config.js, style.css, pdf-cache.js and all other files unchanged.
+다른 파일(index.html, style.css, cloud-sync.js, pdf-cache.js 등)은 그대로 두세요.
 
-Select a symbol in the thread list or on the chart, then click 완료 체크. Only cells matching the selected symbol can be toggled. Clearing selection returns to symbol-selection mode. Existing cell IDs, pattern SHA, and cloud sync calls are unchanged.
+사용법:
+1. 실 목록에서 DMC를 선택합니다.
+2. 상단의 ‹ › 버튼을 누르면 해당 DMC의 미완료 칸만 행 우선 순서로 이동합니다.
+3. 좌표는 '행/열' 숫자만 표시하며 도안 왼쪽 위를 0/0으로 계산합니다.
+4. 빨간 테두리는 현재 탐색 대상 칸입니다.
+5. 완료 체크 모드에서는 선택한 DMC의 칸만 체크할 수 있습니다.
+6. 완료한 칸은 탐색 목록에서 자동 제외됩니다.
+
+기존 저장 키 및 클라우드 동기화 방식은 유지됩니다.
+참고: 실제 브라우저 및 여러 기기에서의 동작은 배포 후 확인이 필요합니다.
