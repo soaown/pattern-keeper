@@ -24,7 +24,7 @@ const lookup = (page,row,col) => allCells.get(idFor(page,row,col));
 const actions = document.createElement('div'); actions.className='pattern-actions';
 actions.innerHTML = `<button id="selectMode" class="active">기호 선택</button><button id="checkMode">완료 체크</button><button id="clearSymbol">선택 해제</button><span id="chosenSymbol">선택한 기호 없음</span><span id="overallProgress">0 / 0</span>`;
 viewer.before(actions);
-// 미완료 기호 탐색: 도안 전체의 0-based 행/열 좌표
+// 미완료 기호 탐색: 10행 단위로 묶고 각 구역에서는 왼쪽 열부터 탐색
 const navigatorBar=document.createElement('span');
 navigatorBar.id='symbolNavigator';
 navigatorBar.style.cssText='display:inline-flex;align-items:center;gap:6px;flex-wrap:nowrap;';
@@ -33,7 +33,7 @@ actions.insertBefore(navigatorBar,$('overallProgress'));
 let targetCellId=null;
 const globalRow=cell=>Math.floor((cell.page-1)/PER_ROW)*ROWS+cell.row;
 const globalCol=cell=>((cell.page-1)%PER_ROW)*COLS+cell.col;
-function pendingCells(){if(!selected)return [];return [...allCells.values()].filter(cell=>(cell.dmc||`미확인 ${cell.symbol}`)===selected&&!done.has(cell.id)).sort((a,b)=>globalRow(a)-globalRow(b)||globalCol(a)-globalCol(b));}
+function pendingCells(){if(!selected)return [];return [...allCells.values()].filter(cell=>(cell.dmc||`미확인 ${cell.symbol}`)===selected&&!done.has(cell.id)).sort((a,b)=>Math.floor(globalRow(a)/10)-Math.floor(globalRow(b)/10)||globalCol(a)-globalCol(b)||globalRow(a)-globalRow(b));}
 function updateNavigator(){
  const list=pendingCells(),cell=list.find(c=>c.id===targetCellId);
  if(!cell)targetCellId=null;
